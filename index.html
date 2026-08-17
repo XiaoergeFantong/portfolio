@@ -1,863 +1,434 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="zh-CN"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
-<meta name="googlebot" content="noindex, nofollow">
-<meta name="bingbot" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow"><meta name="bingbot" content="noindex, nofollow">
 <meta http-equiv="X-Robots-Tag" content="noindex, nofollow">
 <title>范丽君 | 角色模型作品集</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --bg: #0a0a0c; --bg-card: #141418; --bg-elevated: #1c1c22;
-  --text: #e8e6e3; --text-dim: #8a8890; --accent: #c9a96e;
-  --accent-glow: rgba(201, 169, 110, 0.15); --border: rgba(255,255,255,0.06); --radius: 12px;
-}
-html { scroll-behavior: smooth; }
-body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
-::selection { background: var(--accent); color: var(--bg); }
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; text-align: center;
-  position: relative; overflow: hidden; padding: 2rem;
-}
-.hero::before {
-  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(ellipse at 30% 50%, rgba(201,169,110,0.06) 0%, transparent 50%),
-              radial-gradient(ellipse at 70% 50%, rgba(100,120,200,0.04) 0%, transparent 50%);
-  animation: heroFloat 20s ease-in-out infinite;
-}
-@keyframes heroFloat {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(2%, -1%) rotate(1deg); }
-  66% { transform: translate(-1%, 1%) rotate(-0.5deg); }
-}
-.hero-content { position: relative; z-index: 1; }
-.hero h1 {
-  font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-.hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--text-dim); font-weight: 300; letter-spacing: 0.15em; margin-bottom: 2rem; }
-.hero .en-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--accent); opacity: 0.7; margin-bottom: 3rem; }
-.scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--text-dim); font-size: 0.8rem; animation: scrollBounce 2s ease-in-out infinite; }
-.scroll-hint .arrow { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); }
-@keyframes scrollBounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
-
-.sidebar-nav {
-  position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 100;
-  padding: 1rem 0.8rem; display: flex; flex-direction: column; gap: 4px;
-  background: linear-gradient(to right, rgba(10,10,12,0.95), transparent);
-  max-height: 80vh; overflow-y: auto;
-}
-.sidebar-nav::-webkit-scrollbar { width: 0; }
-.nav-link { display: block; padding: 6px 14px; color: var(--text-dim); text-decoration: none; font-size: 0.72rem; border-radius: 6px; transition: all 0.3s; white-space: nowrap; border-left: 2px solid transparent; }
-.nav-link:hover { color: var(--accent); background: var(--accent-glow); border-left-color: var(--accent); }
-
-.gallery-section { max-width: 1400px; margin: 0 auto; padding: 4rem 2rem 2rem; }
-.section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
-.section-icon { font-size: 2rem; }
-.section-header h2 { font-size: 1.6rem; font-weight: 500; }
-.section-desc { font-size: 0.85rem; color: var(--text-dim); margin-top: 2px; }
-
-.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-.gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--bg-card); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
-.gallery-item:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,169,110,0.1); }
-.img-wrapper { width: 100%; aspect-ratio: auto; overflow: hidden; }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
-.gallery-item:hover img { transform: scale(1.05); }
-
-/* Video placeholder */
-.video-placeholder {
-  cursor: default; min-height: 200px; display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
-  border: 1px dashed rgba(255,255,255,0.1);
-}
-.video-placeholder:hover { transform: none; box-shadow: none; }
-.placeholder-content { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 2rem; color: var(--text-dim); text-align: center; }
-.placeholder-content svg { opacity: 0.4; }
-.placeholder-text { font-size: 0.8rem; opacity: 0.6; word-break: break-all; }
-.placeholder-note { font-size: 0.7rem; opacity: 0.3; font-style: italic; }
-
-/* Lightbox */
-.lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); align-items: center; justify-content: center; flex-direction: column; }
-.lightbox.active { display: flex; }
-.lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 4px; box-shadow: 0 20px 80px rgba(0,0,0,0.5); animation: lbFadeIn 0.3s ease; }
-@keyframes lbFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-.lightbox-close { position: absolute; top: 1.5rem; right: 1.5rem; width: 44px; height: 44px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; border-radius: 50%; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; }
-.lightbox-close:hover { background: rgba(255,255,255,0.2); }
-.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border: none; background: rgba(255,255,255,0.08); color: #fff; font-size: 1.5rem; border-radius: 50%; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; }
-.lightbox-nav:hover { background: rgba(255,255,255,0.15); }
-.lightbox-prev { left: 1.5rem; } .lightbox-next { right: 1.5rem; }
-.lightbox-info { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); text-align: center; color: var(--text-dim); font-size: 0.85rem; }
-.lightbox-counter { color: var(--accent); font-size: 0.75rem; margin-top: 4px; }
-
-.footer { text-align: center; padding: 4rem 2rem; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 4rem; }
-
-.back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; background: var(--accent); color: var(--bg); border: none; border-radius: 50%; font-size: 1.2rem; cursor: pointer; opacity: 0; transition: opacity 0.3s, transform 0.3s; z-index: 50; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(201,169,110,0.3); }
-.back-to-top.visible { opacity: 1; } .back-to-top:hover { transform: translateY(-2px); }
-
-@media (max-width: 768px) {
-  .sidebar-nav { display: none; }
-  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
-  .gallery-section { padding: 2rem 1rem; }
-  .section-header h2 { font-size: 1.2rem; }
-  .lightbox-nav { width: 40px; height: 40px; }
-  .lightbox-prev { left: 0.5rem; } .lightbox-next { right: 0.5rem; }
-}
-
-.gallery-item { opacity: 0; transform: translateY(20px); animation: fadeUp 0.5s ease forwards; }
-@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-.gallery-item:nth-child(1) { animation-delay: 0.05s; }
-.gallery-item:nth-child(2) { animation-delay: 0.1s; }
-.gallery-item:nth-child(3) { animation-delay: 0.15s; }
-.gallery-item:nth-child(4) { animation-delay: 0.2s; }
-.gallery-item:nth-child(5) { animation-delay: 0.25s; }
-.gallery-item:nth-child(6) { animation-delay: 0.3s; }
-.gallery-item:nth-child(7) { animation-delay: 0.35s; }
-.gallery-item:nth-child(8) { animation-delay: 0.4s; }
-</style>
-</head>
-<body>
-
-<div class="hero">
-  <div class="hero-content">
-    <h1>范丽君</h1>
-    <p class="en-name">Fan Lijun</p>
-    <p class="subtitle">角 色 模 型 艺 术 家 &nbsp;·&nbsp; CHARACTER ARTIST</p>
-  </div>
-  <div class="scroll-hint"><span>SCROLL</span><div class="arrow"></div></div>
-</div>
-
-<nav class="sidebar-nav"><a href="#q版-花花与幕间剧" class="nav-link">🌸 Q版_花花与幕间剧</a>
-<a href="#三国写实" class="nav-link">⚔️ 三国写实</a>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0c;--bg-card:#141418;--bg-elevated:#1c1c22;--text:#e8e6e3;--text-dim:#8a8890;--accent:#c9a96e;--accent-glow:rgba(201,169,110,0.15);--border:rgba(255,255,255,0.06);--radius:12px}
+html{scroll-behavior:smooth}body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+::selection{background:var(--accent);color:var(--bg)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#333;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:2rem}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 50%,rgba(201,169,110,0.06) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,rgba(100,120,200,0.04) 0%,transparent 50%);animation:hf 20s ease-in-out infinite}
+@keyframes hf{0%,100%{transform:translate(0,0) rotate(0deg)}33%{transform:translate(2%,-1%) rotate(1deg)}66%{transform:translate(-1%,1%) rotate(-0.5deg)}}
+.hero-content{position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6rem);font-weight:400;letter-spacing:.02em;margin-bottom:.5rem;background:linear-gradient(135deg,#fff 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--text-dim);font-weight:300;letter-spacing:.15em;margin-bottom:2rem}
+.hero .en-name{font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;color:var(--accent);opacity:.7;margin-bottom:3rem}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--text-dim);font-size:.8rem;animation:sb 2s ease-in-out infinite}
+.scroll-hint .arrow{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent)}
+@keyframes sb{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.sidebar-nav{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:100;padding:1rem .8rem;display:flex;flex-direction:column;gap:4px;background:linear-gradient(to right,rgba(10,10,12,0.95),transparent);max-height:80vh;overflow-y:auto}
+.sidebar-nav::-webkit-scrollbar{width:0}.nav-link{display:block;padding:6px 14px;color:var(--text-dim);text-decoration:none;font-size:.72rem;border-radius:6px;transition:all .3s;white-space:nowrap;border-left:2px solid transparent}.nav-link:hover{color:var(--accent);background:var(--accent-glow);border-left-color:var(--accent)}
+.gallery-section{max-width:1400px;margin:0 auto;padding:4rem 2rem 2rem}
+.section-header{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.section-icon{font-size:2rem}.section-header h2{font-size:1.6rem;font-weight:500}.section-desc{font-size:.85rem;color:var(--text-dim);margin-top:2px}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.gallery-item{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--bg-card);cursor:pointer;transition:transform .3s,box-shadow .3s}
+.gallery-item:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 0 1px rgba(201,169,110,0.1)}
+.img-wrapper{width:100%;overflow:hidden}.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}.gallery-item:hover img{transform:scale(1.05)}
+.video-card{cursor:default}.video-card:hover{transform:none;box-shadow:none}
+.video-wrapper{width:100%;overflow:hidden}.video-wrapper video{width:100%;display:block;border-radius:var(--radius);background:#000}
+.lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.95);backdrop-filter:blur(20px);align-items:center;justify-content:center;flex-direction:column}
+.lightbox.active{display:flex}.lightbox-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px;box-shadow:0 20px 80px rgba(0,0,0,0.5);animation:lf .3s ease}
+@keyframes lf{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;width:44px;height:44px;border:none;background:rgba(255,255,255,0.1);color:#fff;font-size:1.5rem;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}.lightbox-close:hover{background:rgba(255,255,255,0.2)}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;border:none;background:rgba(255,255,255,0.08);color:#fff;font-size:1.5rem;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}.lightbox-nav:hover{background:rgba(255,255,255,0.15)}.lightbox-prev{left:1.5rem}.lightbox-next{right:1.5rem}
+.lightbox-info{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);text-align:center;color:var(--text-dim);font-size:.85rem}.lightbox-counter{color:var(--accent);font-size:.75rem;margin-top:4px}
+.footer{text-align:center;padding:4rem 2rem;color:var(--text-dim);font-size:.8rem;border-top:1px solid var(--border);margin-top:4rem}
+.back-to-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:var(--accent);color:var(--bg);border:none;border-radius:50%;font-size:1.2rem;cursor:pointer;opacity:0;transition:opacity .3s,transform .3s;z-index:50;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(201,169,110,0.3)}
+.back-to-top.visible{opacity:1}.back-to-top:hover{transform:translateY(-2px)}
+@media(max-width:768px){.sidebar-nav{display:none}.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.gallery-section{padding:2rem 1rem}.section-header h2{font-size:1.2rem}.lightbox-nav{width:40px;height:40px}.lightbox-prev{left:.5rem}.lightbox-next{right:.5rem}}
+.gallery-item{opacity:0;transform:translateY(20px);animation:fu .5s ease forwards}@keyframes fu{to{opacity:1;transform:translateY(0)}}
+.gallery-item:nth-child(1){animation-delay:.05s}.gallery-item:nth-child(2){animation-delay:.1s}.gallery-item:nth-child(3){animation-delay:.15s}.gallery-item:nth-child(4){animation-delay:.2s}.gallery-item:nth-child(5){animation-delay:.25s}.gallery-item:nth-child(6){animation-delay:.3s}.gallery-item:nth-child(7){animation-delay:.35s}.gallery-item:nth-child(8){animation-delay:.4s}
+</style></head><body>
+<div class="hero"><div class="hero-content"><h1>范丽君</h1><p class="en-name">Fan Lijun</p><p class="subtitle">角 色 模 型 艺 术 家 &nbsp;·&nbsp; CHARACTER ARTIST</p></div><div class="scroll-hint"><span>SCROLL</span><div class="arrow"></div></div></div>
+<nav class="sidebar-nav"><a href="#科幻pbr二次元" class="nav-link">🚀 科幻pbr二次元</a>
 <a href="#国风二次元" class="nav-link">🏯 国风二次元</a>
 <a href="#少女篮球二次元" class="nav-link">🏀 少女篮球二次元</a>
-<a href="#库洛-测试提交" class="nav-link">🧪 库洛-测试提交</a>
+<a href="#q版-花花与幕间剧" class="nav-link">🌸 Q版_花花与幕间剧</a>
+<a href="#风格化类光遇" class="nav-link">✨ 风格化（类光遇）</a>
+<a href="#三国写实" class="nav-link">⚔️ 三国写实</a>
 <a href="#手绘陌上云燕行" class="nav-link">🎨 手绘（陌上云燕行）</a>
 <a href="#早期q版次世代传送门骑士" class="nav-link">🎮 早期Q版次世代（传送门骑士）</a>
 <a href="#早期手绘杂" class="nav-link">📝 早期手绘杂</a>
-<a href="#科幻pbr二次元" class="nav-link">🚀 科幻pbr二次元</a>
-<a href="#练习" class="nav-link">✏️ 练习</a>
+<a href="#库洛-测试提交" class="nav-link">🧪 库洛-测试提交</a>
 <a href="#网易测试阶段提交" class="nav-link">📋 网易测试阶段提交</a>
-<a href="#风格化类光遇" class="nav-link">✨ 风格化（类光遇）</a>
+<a href="#练习" class="nav-link">✏️ 练习</a>
 </nav>
-
-<section id="q版-花花与幕间剧" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">🌸</span>
-    <div>
-      <h2>Q版_花花与幕间剧</h2>
-      <p class="section-desc">Chibi - Huahua & Intermission</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item video-placeholder">
-  <div class="placeholder-content">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-    </svg>
-    <span class="placeholder-text">游戏角色换装预览.MP4</span>
-    <span class="placeholder-note">Video available in full version</span>
-  </div>
-</div>
-<div class="gallery-item" data-index="0" onclick="openLightbox(0)">
-  <div class="img-wrapper">
-    <img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%281%29.jpg" alt="花花 (1).jpg" loading="lazy" />
-  </div>
+<section id="科幻pbr二次元" class="gallery-section">
+  <div class="section-header"><span class="section-icon">🚀</span><div><h2>科幻pbr二次元</h2><p class="section-desc">Sci-fi PBR Anime Style</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="0" onclick="openLightbox(0)">
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/52C42B1F-82EC-4d5e-85DF-E326A12C0C8A.jpg" alt="52C42B1F-82EC-4d5e-85DF-E326A12C0C8A.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="1" onclick="openLightbox(1)">
-  <div class="img-wrapper">
-    <img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%282%29.jpg" alt="花花 (2).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%AC%B4%E6%94%BF.jpg" alt="嬴政.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="2" onclick="openLightbox(2)">
-  <div class="img-wrapper">
-    <img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%283%29.jpg" alt="花花 (3).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%96%B0%E7%BE%8E%E7%AC%AC%E5%A5%87%E6%95%88%E6%9E%9C.jpg" alt="新美第奇效果.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="3" onclick="openLightbox(3)">
-  <div class="img-wrapper">
-    <img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%284%29.jpg" alt="花花 (4).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%9D%8E%E7%A7%80%E5%AE%812.jpg" alt="李秀宁2.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="4" onclick="openLightbox(4)">
-  <div class="img-wrapper">
-    <img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%285%29.jpg" alt="花花 (5).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%A2%B5%E9%AB%98.jpg" alt="梵高.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="5" onclick="openLightbox(5)">
-  <div class="img-wrapper">
-    <img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%286%29.jpg" alt="花花 (6).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%281%29.jpg" alt="武器 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="6" onclick="openLightbox(6)">
-  <div class="img-wrapper">
-    <img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%287%29.jpg" alt="花花 (7).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%283%29.jpg" alt="武器 (3).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="7" onclick="openLightbox(7)">
-  <div class="img-wrapper">
-    <img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%288%29.jpg" alt="花花 (8).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%284%29.jpg" alt="武器 (4).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="8" onclick="openLightbox(8)">
-  <div class="img-wrapper">
-    <img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%289%29.jpg" alt="花花 (9).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%83.jpg" alt="科幻二次元.jpg" loading="lazy" /></div>
 </div>
-
-  </div>
-</section>
-
-<section id="三国写实" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">⚔️</span>
-    <div>
-      <h2>三国写实</h2>
-      <p class="section-desc">Three Kingdoms Realistic</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="9" onclick="openLightbox(9)">
-  <div class="img-wrapper">
-    <img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%281%29.jpg" alt="三国写实 (1).jpg" loading="lazy" />
-  </div>
+<div class="gallery-item" data-index="9" onclick="openLightbox(9)">
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%832.jpg" alt="科幻二次元2.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="10" onclick="openLightbox(10)">
-  <div class="img-wrapper">
-    <img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%281%29.jpg" alt="三国写实 (1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%833.jpg" alt="科幻二次元3.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="11" onclick="openLightbox(11)">
-  <div class="img-wrapper">
-    <img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%282%29.jpg" alt="三国写实 (2).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%834.jpg" alt="科幻二次元4.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="12" onclick="openLightbox(12)">
-  <div class="img-wrapper">
-    <img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E7%BA%A7%E5%85%B5.jpg" alt="三级兵.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%99%9E%E5%A7%AC2.jpg" alt="虞姬2.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="13" onclick="openLightbox(13)">
-  <div class="img-wrapper">
-    <img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E5%85%AD%E7%BA%A7%E5%85%B5.jpg" alt="六级兵.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%BE%BE%E8%8A%AC%E5%A5%87.jpg" alt="达芬奇.jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item" data-index="14" onclick="openLightbox(14)">
-  <div class="img-wrapper">
-    <img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E5%85%AD%E7%BA%A7%E5%85%B52.jpg" alt="六级兵2.jpg" loading="lazy" />
-  </div>
+</div>
+</section>
+<section id="国风二次元" class="gallery-section">
+  <div class="section-header"><span class="section-icon">🏯</span><div><h2>国风二次元</h2><p class="section-desc">Chinese Anime Style</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="14" onclick="openLightbox(14)">
+  <div class="img-wrapper"><img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83.jpg" alt="国风二次元.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="15" onclick="openLightbox(15)">
-  <div class="img-wrapper">
-    <img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A11.jpg" alt="裸模1.jpg" loading="lazy" />
+  <div class="img-wrapper"><img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%832.jpg" alt="国风二次元2.jpg" loading="lazy" /></div>
+</div>
+<div class="gallery-item video-card">
+  <div class="video-wrapper">
+    <video src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83%E5%B1%95%E7%A4%BA%E7%95%8C%E9%9D%A2%E6%95%88%E6%9E%9C%E7%A4%BA%E6%84%8F.mp4" controls preload="metadata" playsinline></video>
   </div>
 </div>
 <div class="gallery-item" data-index="16" onclick="openLightbox(16)">
-  <div class="img-wrapper">
-    <img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A12.jpg" alt="裸模2.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%A4%A7%E4%B9%94.jpg" alt="大乔.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="17" onclick="openLightbox(17)">
-  <div class="img-wrapper">
-    <img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A13.jpg" alt="裸模3.jpg" loading="lazy" />
+  <div class="img-wrapper"><img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%A2%81%E7%BB%8D.jpg" alt="袁绍.jpg" loading="lazy" /></div>
+</div>
+<div class="gallery-item" data-index="18" onclick="openLightbox(18)">
+  <div class="img-wrapper"><img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%B2%82%E8%9D%892.jpg" alt="貂蝉2.jpg" loading="lazy" /></div>
+</div>
+<div class="gallery-item video-card">
+  <div class="video-wrapper">
+    <video src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E9%95%9C%E5%A4%B4%E3%80%81%E5%8A%A8%E4%BD%9C%E3%80%81%E5%BC%95%E6%93%8E%E9%85%8D%E7%BD%AE.mp4" controls preload="metadata" playsinline></video>
   </div>
 </div>
-
-  </div>
+</div>
 </section>
-
-<section id="国风二次元" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">🏯</span>
-    <div>
-      <h2>国风二次元</h2>
-      <p class="section-desc">Chinese Anime Style</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="18" onclick="openLightbox(18)">
-  <div class="img-wrapper">
-    <img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83.jpg" alt="国风二次元.jpg" loading="lazy" />
+<section id="少女篮球二次元" class="gallery-section">
+  <div class="section-header"><span class="section-icon">🏀</span><div><h2>少女篮球二次元</h2><p class="section-desc">Basketball Girl Anime</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item video-card">
+  <div class="video-wrapper">
+    <video src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83.mp4" controls preload="metadata" playsinline></video>
   </div>
 </div>
 <div class="gallery-item" data-index="19" onclick="openLightbox(19)">
-  <div class="img-wrapper">
-    <img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%832.jpg" alt="国风二次元2.jpg" loading="lazy" />
-  </div>
-</div>
-<div class="gallery-item video-placeholder">
-  <div class="placeholder-content">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-    </svg>
-    <span class="placeholder-text">国风二次元展示界面效果示意.mp4</span>
-    <span class="placeholder-note">Video available in full version</span>
-  </div>
+  <div class="img-wrapper"><img src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83.jpg" alt="少女二次元.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="20" onclick="openLightbox(20)">
-  <div class="img-wrapper">
-    <img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%A4%A7%E4%B9%94.jpg" alt="大乔.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%832.jpg" alt="少女二次元2.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="21" onclick="openLightbox(21)">
-  <div class="img-wrapper">
-    <img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%A2%81%E7%BB%8D.jpg" alt="袁绍.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%833.jpg" alt="少女二次元3.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="22" onclick="openLightbox(22)">
-  <div class="img-wrapper">
-    <img src="media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%B2%82%E8%9D%892.jpg" alt="貂蝉2.jpg" loading="lazy" />
+  <div class="img-wrapper"><img src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83Q%E7%89%882.jpg" alt="少女二次元Q版2.jpg" loading="lazy" /></div>
+</div>
+<div class="gallery-item video-card">
+  <div class="video-wrapper">
+    <video src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83Q%E7%89%88%E6%95%88%E6%9E%9C%E7%A4%BA%E6%84%8F.mp4" controls preload="metadata" playsinline></video>
   </div>
 </div>
-<div class="gallery-item video-placeholder">
-  <div class="placeholder-content">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-    </svg>
-    <span class="placeholder-text">镜头、动作、引擎配置.mp4</span>
-    <span class="placeholder-note">Video available in full version</span>
-  </div>
 </div>
-
-  </div>
 </section>
-
-<section id="少女篮球二次元" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">🏀</span>
-    <div>
-      <h2>少女篮球二次元</h2>
-      <p class="section-desc">Basketball Girl Anime</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item video-placeholder">
-  <div class="placeholder-content">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-    </svg>
-    <span class="placeholder-text">少女二次元.mp4</span>
-    <span class="placeholder-note">Video available in full version</span>
+<section id="q版-花花与幕间剧" class="gallery-section">
+  <div class="section-header"><span class="section-icon">🌸</span><div><h2>Q版_花花与幕间剧</h2><p class="section-desc">Chibi - Huahua & Intermission</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item video-card">
+  <div class="video-wrapper">
+    <video src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%8D%A2%E8%A3%85%E9%A2%84%E8%A7%88.MP4" controls preload="metadata" playsinline></video>
   </div>
 </div>
 <div class="gallery-item" data-index="23" onclick="openLightbox(23)">
-  <div class="img-wrapper">
-    <img src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83.jpg" alt="少女二次元.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%281%29.jpg" alt="花花 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="24" onclick="openLightbox(24)">
-  <div class="img-wrapper">
-    <img src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%832.jpg" alt="少女二次元2.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%282%29.jpg" alt="花花 (2).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="25" onclick="openLightbox(25)">
-  <div class="img-wrapper">
-    <img src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%833.jpg" alt="少女二次元3.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%283%29.jpg" alt="花花 (3).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="26" onclick="openLightbox(26)">
-  <div class="img-wrapper">
-    <img src="media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83Q%E7%89%882.jpg" alt="少女二次元Q版2.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%284%29.jpg" alt="花花 (4).jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item video-placeholder">
-  <div class="placeholder-content">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-    </svg>
-    <span class="placeholder-text">少女二次元Q版效果示意.mp4</span>
-    <span class="placeholder-note">Video available in full version</span>
-  </div>
-</div>
-
-  </div>
-</section>
-
-<section id="库洛-测试提交" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">🧪</span>
-    <div>
-      <h2>库洛-测试提交</h2>
-      <p class="section-desc">Kuro Test Submission</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="27" onclick="openLightbox(27)">
-  <div class="img-wrapper">
-    <img src="media/%E5%BA%93%E6%B4%9B-%E6%B5%8B%E8%AF%95%E6%8F%90%E4%BA%A4/%E6%A8%A1%E5%9E%8B%E5%B8%83%E7%BA%BF.jpg" alt="模型布线.jpg" loading="lazy" />
-  </div>
+<div class="gallery-item" data-index="27" onclick="openLightbox(27)">
+  <div class="img-wrapper"><img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%285%29.jpg" alt="花花 (5).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="28" onclick="openLightbox(28)">
-  <div class="img-wrapper">
-    <img src="media/%E5%BA%93%E6%B4%9B-%E6%B5%8B%E8%AF%95%E6%8F%90%E4%BA%A4/%E6%B5%8B%E8%AF%95%E6%88%AA%E5%9B%BE.jpg" alt="测试截图.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%286%29.jpg" alt="花花 (6).jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item video-placeholder">
-  <div class="placeholder-content">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-    </svg>
-    <span class="placeholder-text">测试视频.mp4</span>
-    <span class="placeholder-note">Video available in full version</span>
-  </div>
-</div>
-
-  </div>
-</section>
-
-<section id="手绘陌上云燕行" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">🎨</span>
-    <div>
-      <h2>手绘（陌上云燕行）</h2>
-      <p class="section-desc">Hand-painted Illustrations</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="29" onclick="openLightbox(29)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2305.jpg" alt="IMG_2305.jpg" loading="lazy" />
-  </div>
+<div class="gallery-item" data-index="29" onclick="openLightbox(29)">
+  <div class="img-wrapper"><img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%287%29.jpg" alt="花花 (7).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="30" onclick="openLightbox(30)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2308.jpg" alt="IMG_2308.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%288%29.jpg" alt="花花 (8).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="31" onclick="openLightbox(31)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2314%281%29.jpg" alt="IMG_2314(1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%289%29.jpg" alt="花花 (9).jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item" data-index="32" onclick="openLightbox(32)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2746.jpg" alt="IMG_2746.jpg" loading="lazy" />
-  </div>
+</div>
+</section>
+<section id="风格化类光遇" class="gallery-section">
+  <div class="section-header"><span class="section-icon">✨</span><div><h2>风格化（类光遇）</h2><p class="section-desc">Stylized (Sky-like)</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="32" onclick="openLightbox(32)">
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%281%29.jpg" alt="头发 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="33" onclick="openLightbox(33)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2840.jpg" alt="IMG_2840.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%283%29.jpg" alt="头发 (3).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="34" onclick="openLightbox(34)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_4213.jpg" alt="IMG_4213.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%284%29.jpg" alt="头发 (4).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="35" onclick="openLightbox(35)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/NPC%20%281%29.jpg" alt="NPC (1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%281%29.jpg" alt="套装材质 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="36" onclick="openLightbox(36)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/NPC%20%282%29.jpg" alt="NPC (2).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%282%29.jpg" alt="套装材质 (2).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="37" onclick="openLightbox(37)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/%E9%99%8C%E4%B8%8A%E4%BA%91%E9%9B%81%E8%A1%8C%E5%90%88%E9%9B%86.jpg" alt="陌上云雁行合集.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%283%29.jpg" alt="套装材质 (3).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="38" onclick="openLightbox(38)">
-  <div class="img-wrapper">
-    <img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/%E9%A9%AC.jpg" alt="马.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%281%29.jpg" alt="套装高模 (1).jpg" loading="lazy" /></div>
 </div>
-
-  </div>
-</section>
-
-<section id="早期q版次世代传送门骑士" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">🎮</span>
-    <div>
-      <h2>早期Q版次世代（传送门骑士）</h2>
-      <p class="section-desc">Early Chibi Next-Gen</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="39" onclick="openLightbox(39)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/Q%E7%89%88%E6%97%A9%E6%9C%9F.jpg" alt="Q版早期.jpg" loading="lazy" />
-  </div>
+<div class="gallery-item" data-index="39" onclick="openLightbox(39)">
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%281%29.jpg" alt="套装高模 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="40" onclick="openLightbox(40)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/p982d11c9f57831d288b6be11de4ef547.0.jpg" alt="p982d11c9f57831d288b6be11de4ef547.0.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%282%29.jpg" alt="套装高模 (2).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="41" onclick="openLightbox(41)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E5%A5%B3%E5%A5%97%E8%A3%85.jpg" alt="女套装.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%281%29.jpg" alt="怪物材质 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="42" onclick="openLightbox(42)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E6%80%AA%E7%89%A9.jpg" alt="怪物.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%282%29.jpg" alt="怪物材质 (2).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="43" onclick="openLightbox(43)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E7%94%B7%E5%A5%97%E8%A3%85.jpg" alt="男套装.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%283%29.jpg" alt="怪物材质 (3).jpg" loading="lazy" /></div>
 </div>
-
-  </div>
-</section>
-
-<section id="早期手绘杂" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">📝</span>
-    <div>
-      <h2>早期手绘杂</h2>
-      <p class="section-desc">Early Hand-painted Misc</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="44" onclick="openLightbox(44)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/p5344d0afb2f753030ec7669f2a7d5c32.0.jpg" alt="p5344d0afb2f753030ec7669f2a7d5c32.0.jpg" loading="lazy" />
-  </div>
+<div class="gallery-item" data-index="44" onclick="openLightbox(44)">
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%284%29.jpg" alt="怪物材质 (4).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="45" onclick="openLightbox(45)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E5%B1%B1%E7%A5%9E%E5%AE%8C%E6%88%90%E5%AF%B9%E6%AF%94%E5%9B%BE.jpg" alt="山神完成对比图.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%285%29.jpg" alt="怪物材质 (5).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="46" onclick="openLightbox(46)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%89%8B%E7%BB%98%E5%A5%B3%E8%A7%92%E8%89%B2.jpg" alt="手绘女角色.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%281%29.jpg" alt="怪物高模 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="47" onclick="openLightbox(47)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%89%8B%E7%BB%98%E6%9D%82.jpg" alt="手绘杂.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%281%29.jpg" alt="怪物高模 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="48" onclick="openLightbox(48)">
-  <div class="img-wrapper">
-    <img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%97%A9%E6%9C%9F%E4%BD%9C%E5%93%81%E5%90%88%E9%9B%863.jpg" alt="早期作品合集3.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%282%29.jpg" alt="怪物高模 (2).jpg" loading="lazy" /></div>
 </div>
-
-  </div>
-</section>
-
-<section id="科幻pbr二次元" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">🚀</span>
-    <div>
-      <h2>科幻pbr二次元</h2>
-      <p class="section-desc">Sci-fi PBR Anime Style</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="49" onclick="openLightbox(49)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/52C42B1F-82EC-4d5e-85DF-E326A12C0C8A.jpg" alt="52C42B1F-82EC-4d5e-85DF-E326A12C0C8A.jpg" loading="lazy" />
-  </div>
+<div class="gallery-item" data-index="49" onclick="openLightbox(49)">
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%282%29.jpg" alt="怪物高模 (2).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="50" onclick="openLightbox(50)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%AC%B4%E6%94%BF.jpg" alt="嬴政.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%283%29.jpg" alt="怪物高模 (3).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="51" onclick="openLightbox(51)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%96%B0%E7%BE%8E%E7%AC%AC%E5%A5%87%E6%95%88%E6%9E%9C.jpg" alt="新美第奇效果.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E4%B8%8D%E5%90%8C%E5%85%89%E5%BD%B1%E5%A4%84%E7%90%86%20%281%29.jpg" alt="角色不同光影处理 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="52" onclick="openLightbox(52)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%9D%8E%E7%A7%80%E5%AE%812.jpg" alt="李秀宁2.jpg" loading="lazy" />
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E4%B8%8D%E5%90%8C%E5%85%89%E5%BD%B1%E5%A4%84%E7%90%86%20%282%29.jpg" alt="角色不同光影处理 (2).jpg" loading="lazy" /></div>
+</div>
+<div class="gallery-item video-card">
+  <div class="video-wrapper">
+    <video src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E7%8E%AF%E5%A2%83%E5%B1%95%E7%A4%BA%20%281%29.MP4" controls preload="metadata" playsinline></video>
+  </div>
+</div>
+<div class="gallery-item video-card">
+  <div class="video-wrapper">
+    <video src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E7%8E%AF%E5%A2%83%E5%B1%95%E7%A4%BA%20%282%29.MP4" controls preload="metadata" playsinline></video>
   </div>
 </div>
 <div class="gallery-item" data-index="53" onclick="openLightbox(53)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%A2%B5%E9%AB%98.jpg" alt="梵高.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%BD%BD%E5%85%B7.jpg" alt="载具.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="54" onclick="openLightbox(54)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%281%29.jpg" alt="武器 (1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E9%81%93%E5%85%B7.jpg" alt="道具.jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item" data-index="55" onclick="openLightbox(55)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%283%29.jpg" alt="武器 (3).jpg" loading="lazy" />
-  </div>
+</div>
+</section>
+<section id="三国写实" class="gallery-section">
+  <div class="section-header"><span class="section-icon">⚔️</span><div><h2>三国写实</h2><p class="section-desc">Three Kingdoms Realistic</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="55" onclick="openLightbox(55)">
+  <div class="img-wrapper"><img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%281%29.jpg" alt="三国写实 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="56" onclick="openLightbox(56)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%284%29.jpg" alt="武器 (4).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%281%29.jpg" alt="三国写实 (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="57" onclick="openLightbox(57)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%83.jpg" alt="科幻二次元.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%282%29.jpg" alt="三国写实 (2).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="58" onclick="openLightbox(58)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%832.jpg" alt="科幻二次元2.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E7%BA%A7%E5%85%B5.jpg" alt="三级兵.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="59" onclick="openLightbox(59)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%833.jpg" alt="科幻二次元3.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E5%85%AD%E7%BA%A7%E5%85%B5.jpg" alt="六级兵.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="60" onclick="openLightbox(60)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%834.jpg" alt="科幻二次元4.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E5%85%AD%E7%BA%A7%E5%85%B52.jpg" alt="六级兵2.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="61" onclick="openLightbox(61)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%99%9E%E5%A7%AC2.jpg" alt="虞姬2.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A11.jpg" alt="裸模1.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="62" onclick="openLightbox(62)">
-  <div class="img-wrapper">
-    <img src="media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%BE%BE%E8%8A%AC%E5%A5%87.jpg" alt="达芬奇.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A12.jpg" alt="裸模2.jpg" loading="lazy" /></div>
 </div>
-
-  </div>
+<div class="gallery-item" data-index="63" onclick="openLightbox(63)">
+  <div class="img-wrapper"><img src="media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A13.jpg" alt="裸模3.jpg" loading="lazy" /></div>
+</div>
+</div>
 </section>
-
-<section id="练习" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">✏️</span>
-    <div>
-      <h2>练习</h2>
-      <p class="section-desc">Practice Works</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="63" onclick="openLightbox(63)">
-  <div class="img-wrapper">
-    <img src="media/%E7%BB%83%E4%B9%A0/%E6%97%A9%E6%9C%9F%E7%BB%83%E4%B9%A0.jpg" alt="早期练习.jpg" loading="lazy" />
-  </div>
+<section id="手绘陌上云燕行" class="gallery-section">
+  <div class="section-header"><span class="section-icon">🎨</span><div><h2>手绘（陌上云燕行）</h2><p class="section-desc">Hand-painted Illustrations</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="64" onclick="openLightbox(64)">
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2305.jpg" alt="IMG_2305.jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item" data-index="64" onclick="openLightbox(64)">
-  <div class="img-wrapper">
-    <img src="media/%E7%BB%83%E4%B9%A0/%E7%BE%8E%E5%8D%A1%E6%88%98%E5%A3%AB.jpg" alt="美卡战士.jpg" loading="lazy" />
-  </div>
+<div class="gallery-item" data-index="65" onclick="openLightbox(65)">
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2308.jpg" alt="IMG_2308.jpg" loading="lazy" /></div>
 </div>
-
-  </div>
-</section>
-
-<section id="网易测试阶段提交" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">📋</span>
-    <div>
-      <h2>网易测试阶段提交</h2>
-      <p class="section-desc">NetEase Test Submission</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="65" onclick="openLightbox(65)">
-  <div class="img-wrapper">
-    <img src="media/%E7%BD%91%E6%98%93%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4/%E6%88%AA%E5%9B%BE.jpg" alt="截图.jpg" loading="lazy" />
-  </div>
-</div>
-
-  </div>
-</section>
-
-<section id="风格化类光遇" class="gallery-section">
-  <div class="section-header">
-    <span class="section-icon">✨</span>
-    <div>
-      <h2>风格化（类光遇）</h2>
-      <p class="section-desc">Stylized (Sky-like)</p>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="66" onclick="openLightbox(66)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%281%29.jpg" alt="头发 (1).jpg" loading="lazy" />
-  </div>
+<div class="gallery-item" data-index="66" onclick="openLightbox(66)">
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2314%281%29.jpg" alt="IMG_2314(1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="67" onclick="openLightbox(67)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%283%29.jpg" alt="头发 (3).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2746.jpg" alt="IMG_2746.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="68" onclick="openLightbox(68)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%284%29.jpg" alt="头发 (4).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2840.jpg" alt="IMG_2840.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="69" onclick="openLightbox(69)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%281%29.jpg" alt="套装材质 (1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_4213.jpg" alt="IMG_4213.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="70" onclick="openLightbox(70)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%282%29.jpg" alt="套装材质 (2).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/NPC%20%281%29.jpg" alt="NPC (1).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="71" onclick="openLightbox(71)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%283%29.jpg" alt="套装材质 (3).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/NPC%20%282%29.jpg" alt="NPC (2).jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="72" onclick="openLightbox(72)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%281%29.jpg" alt="套装高模 (1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/%E9%99%8C%E4%B8%8A%E4%BA%91%E9%9B%81%E8%A1%8C%E5%90%88%E9%9B%86.jpg" alt="陌上云雁行合集.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="73" onclick="openLightbox(73)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%281%29.jpg" alt="套装高模 (1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/%E9%A9%AC.jpg" alt="马.jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item" data-index="74" onclick="openLightbox(74)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%282%29.jpg" alt="套装高模 (2).jpg" loading="lazy" />
-  </div>
+</div>
+</section>
+<section id="早期q版次世代传送门骑士" class="gallery-section">
+  <div class="section-header"><span class="section-icon">🎮</span><div><h2>早期Q版次世代（传送门骑士）</h2><p class="section-desc">Early Chibi Next-Gen</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="74" onclick="openLightbox(74)">
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/Q%E7%89%88%E6%97%A9%E6%9C%9F.jpg" alt="Q版早期.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="75" onclick="openLightbox(75)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%281%29.jpg" alt="怪物材质 (1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/p982d11c9f57831d288b6be11de4ef547.0.jpg" alt="p982d11c9f57831d288b6be11de4ef547.0.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="76" onclick="openLightbox(76)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%282%29.jpg" alt="怪物材质 (2).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E5%A5%B3%E5%A5%97%E8%A3%85.jpg" alt="女套装.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="77" onclick="openLightbox(77)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%283%29.jpg" alt="怪物材质 (3).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E6%80%AA%E7%89%A9.jpg" alt="怪物.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="78" onclick="openLightbox(78)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%284%29.jpg" alt="怪物材质 (4).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E7%94%B7%E5%A5%97%E8%A3%85.jpg" alt="男套装.jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item" data-index="79" onclick="openLightbox(79)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%285%29.jpg" alt="怪物材质 (5).jpg" loading="lazy" />
-  </div>
+</div>
+</section>
+<section id="早期手绘杂" class="gallery-section">
+  <div class="section-header"><span class="section-icon">📝</span><div><h2>早期手绘杂</h2><p class="section-desc">Early Hand-painted Misc</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="79" onclick="openLightbox(79)">
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/p5344d0afb2f753030ec7669f2a7d5c32.0.jpg" alt="p5344d0afb2f753030ec7669f2a7d5c32.0.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="80" onclick="openLightbox(80)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%281%29.jpg" alt="怪物高模 (1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E5%B1%B1%E7%A5%9E%E5%AE%8C%E6%88%90%E5%AF%B9%E6%AF%94%E5%9B%BE.jpg" alt="山神完成对比图.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="81" onclick="openLightbox(81)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%281%29.jpg" alt="怪物高模 (1).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%89%8B%E7%BB%98%E5%A5%B3%E8%A7%92%E8%89%B2.jpg" alt="手绘女角色.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="82" onclick="openLightbox(82)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%282%29.jpg" alt="怪物高模 (2).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%89%8B%E7%BB%98%E6%9D%82.jpg" alt="手绘杂.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="83" onclick="openLightbox(83)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%282%29.jpg" alt="怪物高模 (2).jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%97%A9%E6%9C%9F%E4%BD%9C%E5%93%81%E5%90%88%E9%9B%863.jpg" alt="早期作品合集3.jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item" data-index="84" onclick="openLightbox(84)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%283%29.jpg" alt="怪物高模 (3).jpg" loading="lazy" />
-  </div>
+</div>
+</section>
+<section id="库洛-测试提交" class="gallery-section">
+  <div class="section-header"><span class="section-icon">🧪</span><div><h2>库洛-测试提交</h2><p class="section-desc">Kuro Test Submission</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="84" onclick="openLightbox(84)">
+  <div class="img-wrapper"><img src="media/%E5%BA%93%E6%B4%9B-%E6%B5%8B%E8%AF%95%E6%8F%90%E4%BA%A4/%E6%A8%A1%E5%9E%8B%E5%B8%83%E7%BA%BF.jpg" alt="模型布线.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="85" onclick="openLightbox(85)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E4%B8%8D%E5%90%8C%E5%85%89%E5%BD%B1%E5%A4%84%E7%90%86%20%281%29.jpg" alt="角色不同光影处理 (1).jpg" loading="lazy" />
+  <div class="img-wrapper"><img src="media/%E5%BA%93%E6%B4%9B-%E6%B5%8B%E8%AF%95%E6%8F%90%E4%BA%A4/%E6%B5%8B%E8%AF%95%E6%88%AA%E5%9B%BE.jpg" alt="测试截图.jpg" loading="lazy" /></div>
+</div>
+<div class="gallery-item video-card">
+  <div class="video-wrapper">
+    <video src="media/%E5%BA%93%E6%B4%9B-%E6%B5%8B%E8%AF%95%E6%8F%90%E4%BA%A4/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4" controls preload="metadata" playsinline></video>
   </div>
 </div>
-<div class="gallery-item" data-index="86" onclick="openLightbox(86)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E4%B8%8D%E5%90%8C%E5%85%89%E5%BD%B1%E5%A4%84%E7%90%86%20%282%29.jpg" alt="角色不同光影处理 (2).jpg" loading="lazy" />
-  </div>
 </div>
-<div class="gallery-item video-placeholder">
-  <div class="placeholder-content">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-    </svg>
-    <span class="placeholder-text">角色环境展示 (1).MP4</span>
-    <span class="placeholder-note">Video available in full version</span>
-  </div>
+</section>
+<section id="网易测试阶段提交" class="gallery-section">
+  <div class="section-header"><span class="section-icon">📋</span><div><h2>网易测试阶段提交</h2><p class="section-desc">NetEase Test Submission</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="86" onclick="openLightbox(86)">
+  <div class="img-wrapper"><img src="media/%E7%BD%91%E6%98%93%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4/%E6%88%AA%E5%9B%BE.jpg" alt="截图.jpg" loading="lazy" /></div>
 </div>
-<div class="gallery-item video-placeholder">
-  <div class="placeholder-content">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-    </svg>
-    <span class="placeholder-text">角色环境展示 (2).MP4</span>
-    <span class="placeholder-note">Video available in full version</span>
-  </div>
 </div>
-<div class="gallery-item" data-index="87" onclick="openLightbox(87)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%BD%BD%E5%85%B7.jpg" alt="载具.jpg" loading="lazy" />
-  </div>
+</section>
+<section id="练习" class="gallery-section">
+  <div class="section-header"><span class="section-icon">✏️</span><div><h2>练习</h2><p class="section-desc">Practice Works</p></div></div>
+  <div class="gallery-grid"><div class="gallery-item" data-index="87" onclick="openLightbox(87)">
+  <div class="img-wrapper"><img src="media/%E7%BB%83%E4%B9%A0/%E6%97%A9%E6%9C%9F%E7%BB%83%E4%B9%A0.jpg" alt="早期练习.jpg" loading="lazy" /></div>
 </div>
 <div class="gallery-item" data-index="88" onclick="openLightbox(88)">
-  <div class="img-wrapper">
-    <img src="media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E9%81%93%E5%85%B7.jpg" alt="道具.jpg" loading="lazy" />
-  </div>
+  <div class="img-wrapper"><img src="media/%E7%BB%83%E4%B9%A0/%E7%BE%8E%E5%8D%A1%E6%88%98%E5%A3%AB.jpg" alt="美卡战士.jpg" loading="lazy" /></div>
 </div>
-
-  </div>
+</div>
 </section>
 
-
-<footer class="footer">
-  <p>&copy; 2026 范丽君 — All Rights Reserved</p>
-  <p style="margin-top:0.5rem; font-size:0.7rem; opacity:0.5;">This portfolio is private. Please do not redistribute.</p>
-</footer>
-
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8249;</button>
-  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button>
-  <img class="lightbox-img" id="lightbox-img" src="" alt="" />
-  <div class="lightbox-info">
-    <div id="lightbox-name"></div>
-    <div class="lightbox-counter" id="lightbox-counter"></div>
-  </div>
-</div>
-
+<footer class="footer"><p>&copy; 2026 范丽君 — All Rights Reserved</p><p style="margin-top:.5rem;font-size:.7rem;opacity:.5">This portfolio is private. Please do not redistribute.</p></footer>
+<div class="lightbox" id="lightbox"><button class="lightbox-close" onclick="closeLightbox()">&times;</button><button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8249;</button><button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button><img class="lightbox-img" id="lightbox-img" src="" alt=""/><div class="lightbox-info"><div id="lightbox-name"></div><div class="lightbox-counter" id="lightbox-counter"></div></div></div>
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
-
 <script>
-const images = [{"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%281%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (1).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%282%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (2).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%283%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (3).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%284%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (4).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%285%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (5).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%286%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (6).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%287%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (7).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%288%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (8).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%289%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (9).jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%281%29.jpg", "cat": "三国写实", "name": "三国写实 (1).jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%281%29.jpg", "cat": "三国写实", "name": "三国写实 (1).jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%282%29.jpg", "cat": "三国写实", "name": "三国写实 (2).jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E7%BA%A7%E5%85%B5.jpg", "cat": "三国写实", "name": "三级兵.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E5%85%AD%E7%BA%A7%E5%85%B5.jpg", "cat": "三国写实", "name": "六级兵.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E5%85%AD%E7%BA%A7%E5%85%B52.jpg", "cat": "三国写实", "name": "六级兵2.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A11.jpg", "cat": "三国写实", "name": "裸模1.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A12.jpg", "cat": "三国写实", "name": "裸模2.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A13.jpg", "cat": "三国写实", "name": "裸模3.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83.jpg", "cat": "国风二次元", "name": "国风二次元.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%832.jpg", "cat": "国风二次元", "name": "国风二次元2.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%A4%A7%E4%B9%94.jpg", "cat": "国风二次元", "name": "大乔.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%A2%81%E7%BB%8D.jpg", "cat": "国风二次元", "name": "袁绍.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%B2%82%E8%9D%892.jpg", "cat": "国风二次元", "name": "貂蝉2.jpg"}, {"src": "media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83.jpg", "cat": "少女篮球二次元", "name": "少女二次元.jpg"}, {"src": "media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%832.jpg", "cat": "少女篮球二次元", "name": "少女二次元2.jpg"}, {"src": "media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%833.jpg", "cat": "少女篮球二次元", "name": "少女二次元3.jpg"}, {"src": "media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83Q%E7%89%882.jpg", "cat": "少女篮球二次元", "name": "少女二次元Q版2.jpg"}, {"src": "media/%E5%BA%93%E6%B4%9B-%E6%B5%8B%E8%AF%95%E6%8F%90%E4%BA%A4/%E6%A8%A1%E5%9E%8B%E5%B8%83%E7%BA%BF.jpg", "cat": "库洛-测试提交", "name": "模型布线.jpg"}, {"src": "media/%E5%BA%93%E6%B4%9B-%E6%B5%8B%E8%AF%95%E6%8F%90%E4%BA%A4/%E6%B5%8B%E8%AF%95%E6%88%AA%E5%9B%BE.jpg", "cat": "库洛-测试提交", "name": "测试截图.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2305.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2305.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2308.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2308.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2314%281%29.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2314(1).jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2746.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2746.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2840.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2840.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_4213.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_4213.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/NPC%20%281%29.jpg", "cat": "手绘（陌上云燕行）", "name": "NPC (1).jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/NPC%20%282%29.jpg", "cat": "手绘（陌上云燕行）", "name": "NPC (2).jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/%E9%99%8C%E4%B8%8A%E4%BA%91%E9%9B%81%E8%A1%8C%E5%90%88%E9%9B%86.jpg", "cat": "手绘（陌上云燕行）", "name": "陌上云雁行合集.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/%E9%A9%AC.jpg", "cat": "手绘（陌上云燕行）", "name": "马.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/Q%E7%89%88%E6%97%A9%E6%9C%9F.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "Q版早期.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/p982d11c9f57831d288b6be11de4ef547.0.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "p982d11c9f57831d288b6be11de4ef547.0.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E5%A5%B3%E5%A5%97%E8%A3%85.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "女套装.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E6%80%AA%E7%89%A9.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "怪物.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E7%94%B7%E5%A5%97%E8%A3%85.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "男套装.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/p5344d0afb2f753030ec7669f2a7d5c32.0.jpg", "cat": "早期手绘杂", "name": "p5344d0afb2f753030ec7669f2a7d5c32.0.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E5%B1%B1%E7%A5%9E%E5%AE%8C%E6%88%90%E5%AF%B9%E6%AF%94%E5%9B%BE.jpg", "cat": "早期手绘杂", "name": "山神完成对比图.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%89%8B%E7%BB%98%E5%A5%B3%E8%A7%92%E8%89%B2.jpg", "cat": "早期手绘杂", "name": "手绘女角色.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%89%8B%E7%BB%98%E6%9D%82.jpg", "cat": "早期手绘杂", "name": "手绘杂.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%97%A9%E6%9C%9F%E4%BD%9C%E5%93%81%E5%90%88%E9%9B%863.jpg", "cat": "早期手绘杂", "name": "早期作品合集3.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/52C42B1F-82EC-4d5e-85DF-E326A12C0C8A.jpg", "cat": "科幻pbr二次元", "name": "52C42B1F-82EC-4d5e-85DF-E326A12C0C8A.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%AC%B4%E6%94%BF.jpg", "cat": "科幻pbr二次元", "name": "嬴政.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%96%B0%E7%BE%8E%E7%AC%AC%E5%A5%87%E6%95%88%E6%9E%9C.jpg", "cat": "科幻pbr二次元", "name": "新美第奇效果.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%9D%8E%E7%A7%80%E5%AE%812.jpg", "cat": "科幻pbr二次元", "name": "李秀宁2.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%A2%B5%E9%AB%98.jpg", "cat": "科幻pbr二次元", "name": "梵高.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%281%29.jpg", "cat": "科幻pbr二次元", "name": "武器 (1).jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%283%29.jpg", "cat": "科幻pbr二次元", "name": "武器 (3).jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%284%29.jpg", "cat": "科幻pbr二次元", "name": "武器 (4).jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%83.jpg", "cat": "科幻pbr二次元", "name": "科幻二次元.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%832.jpg", "cat": "科幻pbr二次元", "name": "科幻二次元2.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%833.jpg", "cat": "科幻pbr二次元", "name": "科幻二次元3.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%834.jpg", "cat": "科幻pbr二次元", "name": "科幻二次元4.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%99%9E%E5%A7%AC2.jpg", "cat": "科幻pbr二次元", "name": "虞姬2.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%BE%BE%E8%8A%AC%E5%A5%87.jpg", "cat": "科幻pbr二次元", "name": "达芬奇.jpg"}, {"src": "media/%E7%BB%83%E4%B9%A0/%E6%97%A9%E6%9C%9F%E7%BB%83%E4%B9%A0.jpg", "cat": "练习", "name": "早期练习.jpg"}, {"src": "media/%E7%BB%83%E4%B9%A0/%E7%BE%8E%E5%8D%A1%E6%88%98%E5%A3%AB.jpg", "cat": "练习", "name": "美卡战士.jpg"}, {"src": "media/%E7%BD%91%E6%98%93%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4/%E6%88%AA%E5%9B%BE.jpg", "cat": "网易测试阶段提交", "name": "截图.jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "头发 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%283%29.jpg", "cat": "风格化（类光遇）", "name": "头发 (3).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%284%29.jpg", "cat": "风格化（类光遇）", "name": "头发 (4).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "套装材质 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "套装材质 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%283%29.jpg", "cat": "风格化（类光遇）", "name": "套装材质 (3).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "套装高模 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "套装高模 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "套装高模 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%283%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (3).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%284%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (4).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%285%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (5).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%283%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (3).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E4%B8%8D%E5%90%8C%E5%85%89%E5%BD%B1%E5%A4%84%E7%90%86%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "角色不同光影处理 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E4%B8%8D%E5%90%8C%E5%85%89%E5%BD%B1%E5%A4%84%E7%90%86%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "角色不同光影处理 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%BD%BD%E5%85%B7.jpg", "cat": "风格化（类光遇）", "name": "载具.jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E9%81%93%E5%85%B7.jpg", "cat": "风格化（类光遇）", "name": "道具.jpg"}];
-let currentIndex = 0;
-function openLightbox(i) { currentIndex=i; updateLightbox(); document.getElementById('lightbox').classList.add('active'); document.body.style.overflow='hidden'; }
-function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow=''; }
-function navLightbox(d) { currentIndex=(currentIndex+d+images.length)%images.length; updateLightbox(); }
-function updateLightbox() { const img=images[currentIndex]; document.getElementById('lightbox-img').src=img.src; document.getElementById('lightbox-img').alt=img.name; document.getElementById('lightbox-name').textContent=img.cat+' / '+img.name; document.getElementById('lightbox-counter').textContent=(currentIndex+1)+' / '+images.length; }
-document.addEventListener('keydown',e=>{ if(!document.getElementById('lightbox').classList.contains('active'))return; if(e.key==='Escape')closeLightbox(); if(e.key==='ArrowLeft')navLightbox(-1); if(e.key==='ArrowRight')navLightbox(1); });
-document.getElementById('lightbox').addEventListener('click',e=>{ if(e.target===e.currentTarget)closeLightbox(); });
-const btn=document.getElementById('backToTop');
-window.addEventListener('scroll',()=>{ btn.classList.toggle('visible',window.scrollY>600); });
-const observer=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.animationPlayState='running'; observer.unobserve(e.target); } }); },{ threshold:0.1 });
-document.querySelectorAll('.gallery-item').forEach(item=>{ item.style.animationPlayState='paused'; observer.observe(item); });
-</script>
-</body>
-</html>
+const images=[{"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/52C42B1F-82EC-4d5e-85DF-E326A12C0C8A.jpg", "cat": "科幻pbr二次元", "name": "52C42B1F-82EC-4d5e-85DF-E326A12C0C8A.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%AC%B4%E6%94%BF.jpg", "cat": "科幻pbr二次元", "name": "嬴政.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%96%B0%E7%BE%8E%E7%AC%AC%E5%A5%87%E6%95%88%E6%9E%9C.jpg", "cat": "科幻pbr二次元", "name": "新美第奇效果.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%9D%8E%E7%A7%80%E5%AE%812.jpg", "cat": "科幻pbr二次元", "name": "李秀宁2.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%A2%B5%E9%AB%98.jpg", "cat": "科幻pbr二次元", "name": "梵高.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%281%29.jpg", "cat": "科幻pbr二次元", "name": "武器 (1).jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%283%29.jpg", "cat": "科幻pbr二次元", "name": "武器 (3).jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E6%AD%A6%E5%99%A8%20%284%29.jpg", "cat": "科幻pbr二次元", "name": "武器 (4).jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%83.jpg", "cat": "科幻pbr二次元", "name": "科幻二次元.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%832.jpg", "cat": "科幻pbr二次元", "name": "科幻二次元2.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%833.jpg", "cat": "科幻pbr二次元", "name": "科幻二次元3.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E7%A7%91%E5%B9%BB%E4%BA%8C%E6%AC%A1%E5%85%834.jpg", "cat": "科幻pbr二次元", "name": "科幻二次元4.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%99%9E%E5%A7%AC2.jpg", "cat": "科幻pbr二次元", "name": "虞姬2.jpg"}, {"src": "media/%E7%A7%91%E5%B9%BBpbr%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%BE%BE%E8%8A%AC%E5%A5%87.jpg", "cat": "科幻pbr二次元", "name": "达芬奇.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83.jpg", "cat": "国风二次元", "name": "国风二次元.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%832.jpg", "cat": "国风二次元", "name": "国风二次元2.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%A4%A7%E4%B9%94.jpg", "cat": "国风二次元", "name": "大乔.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%A2%81%E7%BB%8D.jpg", "cat": "国风二次元", "name": "袁绍.jpg"}, {"src": "media/%E5%9B%BD%E9%A3%8E%E4%BA%8C%E6%AC%A1%E5%85%83/%E8%B2%82%E8%9D%892.jpg", "cat": "国风二次元", "name": "貂蝉2.jpg"}, {"src": "media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83.jpg", "cat": "少女篮球二次元", "name": "少女二次元.jpg"}, {"src": "media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%832.jpg", "cat": "少女篮球二次元", "name": "少女二次元2.jpg"}, {"src": "media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%833.jpg", "cat": "少女篮球二次元", "name": "少女二次元3.jpg"}, {"src": "media/%E5%B0%91%E5%A5%B3%E7%AF%AE%E7%90%83%E4%BA%8C%E6%AC%A1%E5%85%83/%E5%B0%91%E5%A5%B3%E4%BA%8C%E6%AC%A1%E5%85%83Q%E7%89%882.jpg", "cat": "少女篮球二次元", "name": "少女二次元Q版2.jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%281%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (1).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%282%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (2).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%283%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (3).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%284%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (4).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%285%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (5).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%286%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (6).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%287%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (7).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%288%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (8).jpg"}, {"src": "media/Q%E7%89%88_%E8%8A%B1%E8%8A%B1%E4%B8%8E%E5%B9%95%E9%97%B4%E5%89%A7/%E8%8A%B1%E8%8A%B1%20%289%29.jpg", "cat": "Q版_花花与幕间剧", "name": "花花 (9).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "头发 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%283%29.jpg", "cat": "风格化（类光遇）", "name": "头发 (3).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A4%B4%E5%8F%91%20%284%29.jpg", "cat": "风格化（类光遇）", "name": "头发 (4).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "套装材质 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "套装材质 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E6%9D%90%E8%B4%A8%20%283%29.jpg", "cat": "风格化（类光遇）", "name": "套装材质 (3).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "套装高模 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "套装高模 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E5%A5%97%E8%A3%85%E9%AB%98%E6%A8%A1%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "套装高模 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%283%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (3).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%284%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (4).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E6%9D%90%E8%B4%A8%20%285%29.jpg", "cat": "风格化（类光遇）", "name": "怪物材质 (5).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E6%80%AA%E7%89%A9%E9%AB%98%E6%A8%A1%20%283%29.jpg", "cat": "风格化（类光遇）", "name": "怪物高模 (3).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E4%B8%8D%E5%90%8C%E5%85%89%E5%BD%B1%E5%A4%84%E7%90%86%20%281%29.jpg", "cat": "风格化（类光遇）", "name": "角色不同光影处理 (1).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%A7%92%E8%89%B2%E4%B8%8D%E5%90%8C%E5%85%89%E5%BD%B1%E5%A4%84%E7%90%86%20%282%29.jpg", "cat": "风格化（类光遇）", "name": "角色不同光影处理 (2).jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E8%BD%BD%E5%85%B7.jpg", "cat": "风格化（类光遇）", "name": "载具.jpg"}, {"src": "media/%E9%A3%8E%E6%A0%BC%E5%8C%96%EF%BC%88%E7%B1%BB%E5%85%89%E9%81%87%EF%BC%89/%E9%81%93%E5%85%B7.jpg", "cat": "风格化（类光遇）", "name": "道具.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%281%29.jpg", "cat": "三国写实", "name": "三国写实 (1).jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%281%29.jpg", "cat": "三国写实", "name": "三国写实 (1).jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E%20%282%29.jpg", "cat": "三国写实", "name": "三国写实 (2).jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E4%B8%89%E7%BA%A7%E5%85%B5.jpg", "cat": "三国写实", "name": "三级兵.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E5%85%AD%E7%BA%A7%E5%85%B5.jpg", "cat": "三国写实", "name": "六级兵.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E5%85%AD%E7%BA%A7%E5%85%B52.jpg", "cat": "三国写实", "name": "六级兵2.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A11.jpg", "cat": "三国写实", "name": "裸模1.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A12.jpg", "cat": "三国写实", "name": "裸模2.jpg"}, {"src": "media/%E4%B8%89%E5%9B%BD%E5%86%99%E5%AE%9E/%E8%A3%B8%E6%A8%A13.jpg", "cat": "三国写实", "name": "裸模3.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2305.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2305.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2308.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2308.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2314%281%29.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2314(1).jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2746.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2746.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_2840.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_2840.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/IMG_4213.jpg", "cat": "手绘（陌上云燕行）", "name": "IMG_4213.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/NPC%20%281%29.jpg", "cat": "手绘（陌上云燕行）", "name": "NPC (1).jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/NPC%20%282%29.jpg", "cat": "手绘（陌上云燕行）", "name": "NPC (2).jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/%E9%99%8C%E4%B8%8A%E4%BA%91%E9%9B%81%E8%A1%8C%E5%90%88%E9%9B%86.jpg", "cat": "手绘（陌上云燕行）", "name": "陌上云雁行合集.jpg"}, {"src": "media/%E6%89%8B%E7%BB%98%EF%BC%88%E9%99%8C%E4%B8%8A%E4%BA%91%E7%87%95%E8%A1%8C%EF%BC%89/%E9%A9%AC.jpg", "cat": "手绘（陌上云燕行）", "name": "马.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/Q%E7%89%88%E6%97%A9%E6%9C%9F.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "Q版早期.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/p982d11c9f57831d288b6be11de4ef547.0.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "p982d11c9f57831d288b6be11de4ef547.0.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E5%A5%B3%E5%A5%97%E8%A3%85.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "女套装.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E6%80%AA%E7%89%A9.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "怪物.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9FQ%E7%89%88%E6%AC%A1%E4%B8%96%E4%BB%A3%EF%BC%88%E4%BC%A0%E9%80%81%E9%97%A8%E9%AA%91%E5%A3%AB%EF%BC%89/%E7%94%B7%E5%A5%97%E8%A3%85.jpg", "cat": "早期Q版次世代（传送门骑士）", "name": "男套装.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/p5344d0afb2f753030ec7669f2a7d5c32.0.jpg", "cat": "早期手绘杂", "name": "p5344d0afb2f753030ec7669f2a7d5c32.0.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E5%B1%B1%E7%A5%9E%E5%AE%8C%E6%88%90%E5%AF%B9%E6%AF%94%E5%9B%BE.jpg", "cat": "早期手绘杂", "name": "山神完成对比图.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%89%8B%E7%BB%98%E5%A5%B3%E8%A7%92%E8%89%B2.jpg", "cat": "早期手绘杂", "name": "手绘女角色.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%89%8B%E7%BB%98%E6%9D%82.jpg", "cat": "早期手绘杂", "name": "手绘杂.jpg"}, {"src": "media/%E6%97%A9%E6%9C%9F%E6%89%8B%E7%BB%98%E6%9D%82/%E6%97%A9%E6%9C%9F%E4%BD%9C%E5%93%81%E5%90%88%E9%9B%863.jpg", "cat": "早期手绘杂", "name": "早期作品合集3.jpg"}, {"src": "media/%E5%BA%93%E6%B4%9B-%E6%B5%8B%E8%AF%95%E6%8F%90%E4%BA%A4/%E6%A8%A1%E5%9E%8B%E5%B8%83%E7%BA%BF.jpg", "cat": "库洛-测试提交", "name": "模型布线.jpg"}, {"src": "media/%E5%BA%93%E6%B4%9B-%E6%B5%8B%E8%AF%95%E6%8F%90%E4%BA%A4/%E6%B5%8B%E8%AF%95%E6%88%AA%E5%9B%BE.jpg", "cat": "库洛-测试提交", "name": "测试截图.jpg"}, {"src": "media/%E7%BD%91%E6%98%93%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4/%E6%88%AA%E5%9B%BE.jpg", "cat": "网易测试阶段提交", "name": "截图.jpg"}, {"src": "media/%E7%BB%83%E4%B9%A0/%E6%97%A9%E6%9C%9F%E7%BB%83%E4%B9%A0.jpg", "cat": "练习", "name": "早期练习.jpg"}, {"src": "media/%E7%BB%83%E4%B9%A0/%E7%BE%8E%E5%8D%A1%E6%88%98%E5%A3%AB.jpg", "cat": "练习", "name": "美卡战士.jpg"}];let ci=0;
+function openLightbox(i){ci=i;updateLightbox();document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden'}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow=''}
+function navLightbox(d){ci=(ci+d+images.length)%images.length;updateLightbox()}
+function updateLightbox(){const img=images[ci];document.getElementById('lightbox-img').src=img.src;document.getElementById('lightbox-img').alt=img.name;document.getElementById('lightbox-name').textContent=img.cat+' / '+img.name;document.getElementById('lightbox-counter').textContent=(ci+1)+' / '+images.length}
+document.addEventListener('keydown',e=>{if(!document.getElementById('lightbox').classList.contains('active'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')navLightbox(-1);if(e.key==='ArrowRight')navLightbox(1)});
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLightbox()});
+const btn=document.getElementById('backToTop');window.addEventListener('scroll',()=>{btn.classList.toggle('visible',window.scrollY>600)});
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.style.animationPlayState='running';obs.unobserve(e.target)}})},{threshold:0.1});
+document.querySelectorAll('.gallery-item').forEach(it=>{it.style.animationPlayState='paused';obs.observe(it)});
+</script></body></html>

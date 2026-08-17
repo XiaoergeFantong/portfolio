@@ -1,0 +1,422 @@
+{
+  "Q版_花花与幕间剧": [
+    {
+      "name": "游戏角色换装预览.MP4",
+      "type": "video",
+      "placeholder": true
+    },
+    {
+      "name": "花花 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "花花 (2).jpg",
+      "type": "image"
+    },
+    {
+      "name": "花花 (3).jpg",
+      "type": "image"
+    },
+    {
+      "name": "花花 (4).jpg",
+      "type": "image"
+    },
+    {
+      "name": "花花 (5).jpg",
+      "type": "image"
+    },
+    {
+      "name": "花花 (6).jpg",
+      "type": "image"
+    },
+    {
+      "name": "花花 (7).jpg",
+      "type": "image"
+    },
+    {
+      "name": "花花 (8).jpg",
+      "type": "image"
+    },
+    {
+      "name": "花花 (9).jpg",
+      "type": "image"
+    }
+  ],
+  "三国写实": [
+    {
+      "name": "三国写实 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "三国写实 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "三国写实 (2).jpg",
+      "type": "image"
+    },
+    {
+      "name": "三级兵.jpg",
+      "type": "image"
+    },
+    {
+      "name": "六级兵.jpg",
+      "type": "image"
+    },
+    {
+      "name": "六级兵2.jpg",
+      "type": "image"
+    },
+    {
+      "name": "裸模1.jpg",
+      "type": "image"
+    },
+    {
+      "name": "裸模2.jpg",
+      "type": "image"
+    },
+    {
+      "name": "裸模3.jpg",
+      "type": "image"
+    }
+  ],
+  "国风二次元": [
+    {
+      "name": "国风二次元.jpg",
+      "type": "image"
+    },
+    {
+      "name": "国风二次元2.jpg",
+      "type": "image"
+    },
+    {
+      "name": "国风二次元展示界面效果示意.mp4",
+      "type": "video",
+      "placeholder": true
+    },
+    {
+      "name": "大乔.jpg",
+      "type": "image"
+    },
+    {
+      "name": "袁绍.jpg",
+      "type": "image"
+    },
+    {
+      "name": "貂蝉2.jpg",
+      "type": "image"
+    },
+    {
+      "name": "镜头、动作、引擎配置.mp4",
+      "type": "video",
+      "placeholder": true
+    }
+  ],
+  "少女篮球二次元": [
+    {
+      "name": "少女二次元.mp4",
+      "type": "video",
+      "placeholder": true
+    },
+    {
+      "name": "少女二次元.jpg",
+      "type": "image"
+    },
+    {
+      "name": "少女二次元2.jpg",
+      "type": "image"
+    },
+    {
+      "name": "少女二次元3.jpg",
+      "type": "image"
+    },
+    {
+      "name": "少女二次元Q版2.jpg",
+      "type": "image"
+    },
+    {
+      "name": "少女二次元Q版效果示意.mp4",
+      "type": "video",
+      "placeholder": true
+    }
+  ],
+  "库洛-测试提交": [
+    {
+      "name": "模型布线.jpg",
+      "type": "image"
+    },
+    {
+      "name": "测试截图.jpg",
+      "type": "image"
+    },
+    {
+      "name": "测试视频.mp4",
+      "type": "video",
+      "placeholder": true
+    }
+  ],
+  "手绘（陌上云燕行）": [
+    {
+      "name": "IMG_2305.jpg",
+      "type": "image"
+    },
+    {
+      "name": "IMG_2308.jpg",
+      "type": "image"
+    },
+    {
+      "name": "IMG_2314(1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "IMG_2746.jpg",
+      "type": "image"
+    },
+    {
+      "name": "IMG_2840.jpg",
+      "type": "image"
+    },
+    {
+      "name": "IMG_4213.jpg",
+      "type": "image"
+    },
+    {
+      "name": "NPC (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "NPC (2).jpg",
+      "type": "image"
+    },
+    {
+      "name": "陌上云雁行合集.jpg",
+      "type": "image"
+    },
+    {
+      "name": "马.jpg",
+      "type": "image"
+    }
+  ],
+  "早期Q版次世代（传送门骑士）": [
+    {
+      "name": "Q版早期.jpg",
+      "type": "image"
+    },
+    {
+      "name": "p982d11c9f57831d288b6be11de4ef547.0.jpg",
+      "type": "image"
+    },
+    {
+      "name": "女套装.jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物.jpg",
+      "type": "image"
+    },
+    {
+      "name": "男套装.jpg",
+      "type": "image"
+    }
+  ],
+  "早期手绘杂": [
+    {
+      "name": "p5344d0afb2f753030ec7669f2a7d5c32.0.jpg",
+      "type": "image"
+    },
+    {
+      "name": "山神完成对比图.jpg",
+      "type": "image"
+    },
+    {
+      "name": "手绘女角色.jpg",
+      "type": "image"
+    },
+    {
+      "name": "手绘杂.jpg",
+      "type": "image"
+    },
+    {
+      "name": "早期作品合集3.jpg",
+      "type": "image"
+    }
+  ],
+  "科幻pbr二次元": [
+    {
+      "name": "52C42B1F-82EC-4d5e-85DF-E326A12C0C8A.jpg",
+      "type": "image"
+    },
+    {
+      "name": "嬴政.jpg",
+      "type": "image"
+    },
+    {
+      "name": "新美第奇效果.jpg",
+      "type": "image"
+    },
+    {
+      "name": "李秀宁2.jpg",
+      "type": "image"
+    },
+    {
+      "name": "梵高.jpg",
+      "type": "image"
+    },
+    {
+      "name": "武器 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "武器 (3).jpg",
+      "type": "image"
+    },
+    {
+      "name": "武器 (4).jpg",
+      "type": "image"
+    },
+    {
+      "name": "科幻二次元.jpg",
+      "type": "image"
+    },
+    {
+      "name": "科幻二次元2.jpg",
+      "type": "image"
+    },
+    {
+      "name": "科幻二次元3.jpg",
+      "type": "image"
+    },
+    {
+      "name": "科幻二次元4.jpg",
+      "type": "image"
+    },
+    {
+      "name": "虞姬2.jpg",
+      "type": "image"
+    },
+    {
+      "name": "达芬奇.jpg",
+      "type": "image"
+    }
+  ],
+  "练习": [
+    {
+      "name": "早期练习.jpg",
+      "type": "image"
+    },
+    {
+      "name": "美卡战士.jpg",
+      "type": "image"
+    }
+  ],
+  "网易测试阶段提交": [
+    {
+      "name": "截图.jpg",
+      "type": "image"
+    }
+  ],
+  "风格化（类光遇）": [
+    {
+      "name": "头发 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "头发 (3).jpg",
+      "type": "image"
+    },
+    {
+      "name": "头发 (4).jpg",
+      "type": "image"
+    },
+    {
+      "name": "套装材质 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "套装材质 (2).jpg",
+      "type": "image"
+    },
+    {
+      "name": "套装材质 (3).jpg",
+      "type": "image"
+    },
+    {
+      "name": "套装高模 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "套装高模 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "套装高模 (2).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物材质 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物材质 (2).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物材质 (3).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物材质 (4).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物材质 (5).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物高模 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物高模 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物高模 (2).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物高模 (2).jpg",
+      "type": "image"
+    },
+    {
+      "name": "怪物高模 (3).jpg",
+      "type": "image"
+    },
+    {
+      "name": "角色不同光影处理 (1).jpg",
+      "type": "image"
+    },
+    {
+      "name": "角色不同光影处理 (2).jpg",
+      "type": "image"
+    },
+    {
+      "name": "角色环境展示 (1).MP4",
+      "type": "video",
+      "placeholder": true
+    },
+    {
+      "name": "角色环境展示 (2).MP4",
+      "type": "video",
+      "placeholder": true
+    },
+    {
+      "name": "载具.jpg",
+      "type": "image"
+    },
+    {
+      "name": "道具.jpg",
+      "type": "image"
+    }
+  ]
+}
